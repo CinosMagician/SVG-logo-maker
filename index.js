@@ -2,6 +2,7 @@ const inquirer = require(`inquirer`);
 const fs = require(`fs`);
 const fileName = "./examples/logo.svg";
 const selectShape = require(`./lib/shapeSelection`);
+const validateColor = require(`./lib/colorCheck`);
 
 function generateLogo(response) {
     const logo = selectShape(response);
@@ -25,7 +26,16 @@ function init() {
         {
             type: 'input',
             name: 'textColor',
-            message: 'Enter a colour for text (Either colour name or Hexadecimal number):'
+            message: 'Enter a colour for text (Either colour name or Hexadecimal number):',
+            validate: (answer) => {
+                const isValid = validateColor(answer);
+                    if (isValid) {
+                        return true;
+                    } else {
+                        console.log("\nColor must be a valid name or hexidecimal input, please try again.");
+                        return false;
+                    }
+            }
         },
         {
             type: 'list',
@@ -36,7 +46,16 @@ function init() {
         {
             type: 'input',
             name: 'shapeColor',
-            message: 'Enter a colour for the shape (Either colour name or Hexadecimal number):'
+            message: 'Enter a colour for the shape (Either colour name or Hexadecimal number):',
+            validate: (answer) => {
+                const isValid = validateColor(answer);
+                    if (isValid) {
+                        return true;
+                    } else {
+                        console.log("\nColor must be a valid name or hexidecimal input, please try again.");
+                        return false;
+                    }
+            }
         }
         ]).then((response) => {
             console.log(`You have selected the characters: ${response.logoText} which will be in the color of ${response.textColor}. Using the ${response.shape} Shape with the shape color of ${response.shapeColor}`);
