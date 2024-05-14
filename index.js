@@ -26,7 +26,7 @@ function init() {
         {
             type: 'input',
             name: 'textColor',
-            message: 'Enter a colour for text (Either colour name or Hexadecimal number):',
+            message: 'Enter a colour for text using either a colour name with camel casing for 2 word color names (e.g. aliceBlue) or a Hexadecimal value (e.g. #F0F8FF):',
             validate: (answer) => {
                 const isValid = validateColor(answer);
                     if (isValid) {
@@ -46,7 +46,7 @@ function init() {
         {
             type: 'input',
             name: 'shapeColor',
-            message: 'Enter a colour for the shape (Either colour name or Hexadecimal number):',
+            message: 'Enter a colour for text using either a colour name with camel casing for 2 word color names (e.g. aliceBlue) or a Hexadecimal value (e.g. #F0F8FF):',
             validate: (answer) => {
                 const isValid = validateColor(answer);
                     if (isValid) {
@@ -58,7 +58,6 @@ function init() {
             }
         }
         ]).then((response) => {
-            console.log(`You have selected the characters: ${response.logoText} which will be in the color of ${response.textColor}. Using the ${response.shape} Shape with the shape color of ${response.shapeColor}`);
             generateLogo(response);
         })
 };
